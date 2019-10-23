@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xmlns:jaxws="http://cxf.apache.org/jaxws"
+	   xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	   http://www.springframework.org/schema/tx
+	   http://www.springframework.org/schema/tx/spring-tx.xsd
+	   http://www.springframework.org/schema/context
+	   http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	   http://cxf.apache.org/jaxws
+       http://cxf.apache.org/schemas/jaxws.xsd
+       http://cxf.apache.org/jaxrs 
+       http://cxf.apache.org/schemas/jaxrs.xsd">
+            
+	<context:component-scan base-package="br.com.appservice" />
+	<import resource="db.xml" />
+		
+	<jaxrs:server id="usuariorest" address="/usuarioRest">
+		<jaxrs:serviceBeans>
+			<ref bean="usuarioRest" />
+		</jaxrs:serviceBeans>
+	</jaxrs:server>
+	
+	<bean id="usuariows" class="br.com.appservice.ws.UsuarioWs"/>
+	<jaxws:endpoint id="usuarioService" implementor= "#usuariows" address="/UsuarioWebService" />
+		
+</beans>
